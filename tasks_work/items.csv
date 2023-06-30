@@ -1,0 +1,136 @@
+price
+985
+804
+449
+385
+729
+926
+907
+923
+496
+727
+339
+286
+709WITH revenue_summary AS (
+    SELECT
+        items.itemid,
+        items.item_name,
+        SUM(items.price) AS total_revenue
+    FROM
+        items
+    JOIN
+        purchases ON items.itemid = purchases.itemid
+    JOIN
+        users ON users.userid = purchases.userid
+    WHERE
+        purchases.date >= '2023-01-01'
+        AND purchases.date < '2024-01-01'
+    GROUP BY
+        items.itemid,
+        items.item_name
+),
+total_revenue AS (
+    SELECT
+        SUM(total_revenue) AS overall_revenue
+    FROM
+        revenue_summary
+)
+SELECT
+    item_name,
+    total_revenue,
+    ROUND(total_revenue * 100 / overall_revenue, 2) AS revenue_share
+FROM
+    revenue_summary
+JOIN
+    total_revenue ON 1=1
+ORDER BY
+    total_revenue DESC
+LIMIT
+    3;
+414
+642
+871
+960
+254
+129
+721
+340
+608
+791
+679
+147
+342
+727
+398
+656
+160
+122
+108
+270
+182
+117
+377
+971
+550
+385
+316
+743
+964
+279
+320
+840
+186
+805
+623
+359
+200
+897
+105
+764
+308
+814
+460
+290
+341
+984
+636
+861
+330
+593
+925
+176
+531
+781
+405
+117
+225
+205
+107
+906
+953
+219
+580
+574
+234
+824
+607
+685
+522
+523
+895
+721
+975
+555
+815
+297
+478
+692
+343
+478
+122
+920
+572
+419
+453
+587
+147
